@@ -1,0 +1,30 @@
+playing characters: Jelly
+Non playing characters: Monsters
+
+Goal for PC: Player has to control jelly to reach end pount, to move onto the next level.
+Rules:
+    - fall into the fire and you die
+    - can't go through the walls
+    - space bar to jump, arrow keys to move around
+    - when you reach the green checkpoint, you can respawn at that place if you die, 1 tries only
+    - If 5 power-ups collected:
+     earn invincibilty to fire 1x  \
+     or stick to the walls for 10 seconds  \
+     or get 1 extra life  \
+
+     - reach the portal to win
+
+     feedback:
+     when collected 5 power-ups, display encouraging message and choice to have power up, or save points.
+     when jelly dies 
+
+     sounds:
+     when power up collected
+     when game restarted (death of jelly)
+     when game continues to next level (jelly wins)
+     when jelly touches fire
+
+
+Story: 
+Jelly is an astronaut, trying to escape an all-consuming black hole, threatening to wipe out the entire universe.
+ The jelly must reach the dimension portal to jump through space-time to escape the black hole's wrath.
