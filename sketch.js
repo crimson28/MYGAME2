@@ -1,6 +1,13 @@
+// instead of writing matter.engine for everything, we give it a constant nickname 
+const Engine = Matter.Engine;
+const World = Matter.World;
+const Bodies = Matter.Bodies;
+
 var robot;
 var wall1, wall2, wall3, wall4, wall5, wall6,wall7,wall8,wall9,wall10,wall11, wall12;
 var wall13, wall14,wall15,wall16,wall17,wall18, wall19, wall20, wall21, wall22;
+
+var engine,world;
 
 
 function preload(){
@@ -11,8 +18,27 @@ function preload(){
 function setup(){
     
     createCanvas(900,800);
+
+    //create engine
+
+    engine = Engine.create();
+
+    //assign the World created by engine to the variable name we made
+    world = engine.world;
+
+    //create robot and add to myWorld
+
+    robot = Bodies.rectangle(50,120,30,30);
+    World.add(world,robot);
+    console.log(robot);
     
-    robot = createSprite(50,120,30,30);
+    console.log(world);
+
+    
+    
+    
+    
+    //robot = createSprite(50,120,30,30);
     
     wall1 = new Wall(250,550,350,20);
     wall2 = new Wall(200,250,350,20);
@@ -50,25 +76,22 @@ function draw(){
     
     
     background("orange");
+    
+    //update engine
 
-    if(keyDown(LEFT_ARROW)){
-        
-        robot.x = robot.x - 5;
-    }
- 
-    if(keyDown(RIGHT_ARROW)){
+    Engine.update(engine);
 
-        robot.x = robot.x + 5;
-    }
-
-    if(keyDown("space")){
-
-        robot.velocityY += -2;
-    }
+    
     
     //robot.velocityY += 0.8;
 
     text(mouseX + "," + mouseY,mouseX,mouseY);
+
+    //display robot 
+
+    rectMode(CENTER);
+    //console.log(robot.body.position);
+    rect(robot.position.x, robot.position.y,30,30);
     
 
 
@@ -104,3 +127,30 @@ function draw(){
 
     
 }
+
+function keyPressed(){
+
+    if(keyIsDown(LEFT_ARROW)){
+
+        //this will move the robot
+
+        Matter.Body.translate(robot,{ x : -10 , y : 0});
+    }
+
+    if(keyIsDown(RIGHT_ARROW)){
+
+        //this will move the robot
+
+        Matter.Body.translate(robot,{ x : 10 , y : 0});
+    }
+
+    if(keyIsDown(32)){
+
+        //this will move the robot
+
+        
+
+        Matter.Body.translate(robot,{ x : 0 , y : 15});
+    }
+}
+
