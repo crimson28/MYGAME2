@@ -6,6 +6,8 @@ const Bodies = Matter.Bodies;
 var robot;
 var wall1, wall2, wall3, wall4, wall5, wall6,wall7,wall8,wall9,wall10,wall11, wall12;
 var wall13, wall14,wall15,wall16,wall17,wall18, wall19, wall20, wall21, wall22;
+//var wallTop, bottom;
+var side1, side2;
 
 var engine,world;
 
@@ -67,8 +69,13 @@ function setup(){
     wall25 = new Wall(810,670,20,200);
     wall26 = new Wall(825,560,150,20);
     wall27 = new Wall(770,630,70,20);
-  
 
+   // wallTop = new Wall(450,3,900,20);
+    //console.log(wallTop);
+   
+   // bottom = new Wall(450,790,900,20);
+    side1 = new Wall(890,405,20,900);
+    side2 = new Wall(10,405,20,900);
 
 }
 
@@ -81,6 +88,12 @@ function draw(){
 
     Engine.update(engine);
 
+    if(robot.position.y > 800){
+        
+        Matter.Body.setPosition(robot, {x : 160 , y: -30});
+    }
+
+    
     
     
     //robot.velocityY += 0.8;
@@ -92,6 +105,11 @@ function draw(){
     rectMode(CENTER);
     //console.log(robot.body.position);
     rect(robot.position.x, robot.position.y,30,30);
+
+   // wallTop.display();
+   // bottom.display();
+    side1.display();
+    side2.display();
     
 
 
@@ -116,12 +134,15 @@ function draw(){
     wall19.display();
     wall20.display();
     wall21.display();
-   wall22.display();
-   wall23.display();
-   wall24.display();
-   wall25.display();
-   wall26.display();
-   wall27.display();
+    wall22.display();
+    wall23.display();
+    wall24.display();
+    wall25.display();
+    wall26.display();
+    wall27.display();
+
+    //wallTop.body.render.visible = false;
+  
     
     drawSprites();
 
@@ -134,23 +155,26 @@ function keyPressed(){
 
         //this will move the robot
 
-        Matter.Body.translate(robot,{ x : -10 , y : 0});
+        Matter.Body.setVelocity(robot,{ x : -10 , y : 0});
     }
 
     if(keyIsDown(RIGHT_ARROW)){
 
         //this will move the robot
 
-        Matter.Body.translate(robot,{ x : 10 , y : 0});
+        // when it is a vector, you need to declare x and y in culry brackets
+ 
+        Matter.Body.setVelocity(robot,{ x : 10 , y : 0});
+
+       
     }
 
-    if(keyIsDown(32)){
+    if(keyIsDown(32) && Matter.SAT.collides(robot,wall2.body)){
 
         //this will move the robot
-
-        
-
-        Matter.Body.translate(robot,{ x : 0 , y : 15});
+console.log("Touching");
+      //  Matter.Body.translate(robot,{ x : 0 , y : 15});
+      Matter.Body.setVelocity(robot,{x : 0, y : -10} );
     }
 }
 
